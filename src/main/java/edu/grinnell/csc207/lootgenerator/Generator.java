@@ -201,7 +201,7 @@ public class Generator {
      */
     private String randomRecursiveSearch(String item, Map map) {
         //Base case
-        if (!map.containsKey(item)) {
+        if (isFinalUnit(map, item)) {
             return item;
         } else {
             //Keep searching
@@ -209,5 +209,9 @@ public class Generator {
 
             return randomRecursiveSearch(getRandom(Arrays.asList(values)), map);
         }
+    }
+
+    private static boolean isFinalUnit(Map map, String item) {
+        return !map.containsKey(item);
     }
 }
