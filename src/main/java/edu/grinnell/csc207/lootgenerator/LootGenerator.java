@@ -1,12 +1,20 @@
 package edu.grinnell.csc207.lootgenerator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The LootGenerator class runs an interactive loop where a monster is generated,
+ * defeated, and a treasure drop is shown to the user.
+ * The user can choose to continue or exit.
+ * 
+ * Dataset path is currently hardcoded to use the large set in the data directory.
+ * 
+ * Credit:
+ * - https://www.codementor.io/@seranguyen/
+ *   java-regular-expression-part-2-matching-text-for-validation-1-r3kua75tx
+ * - https://stackoverflow.com/a/3059367
+ * 
+ */
 public class LootGenerator {
 
     /**
@@ -14,12 +22,16 @@ public class LootGenerator {
      */
     private static final String DATA_SET = "data/large";
 
+    /**
+     * Main method to run the loot generation simulation.
+     *
+     * @param args the command-line arguments (not used)
+     */
     public static void main(String[] args) {
         boolean isRunning = true;
-
         Generator generator = new Generator(DATA_SET);
 
-        //main controlling loop
+        // main controlling loop
         while (isRunning) {
 
             Monster monster = generator.generateMonster();
@@ -36,15 +48,18 @@ public class LootGenerator {
             String response = getUserInput("Fight again [y/n]?", "y|n");
 
             if (response.equals("n")) {
-               isRunning = false;
+                isRunning = false;
             }
-
         }
-
     }
 
-    //credit:https://www.codementor.io/@seranguyen/java-regular-expression-part-2-matching-text-for-validation-1-r3kua75tx
-    //credit:https://stackoverflow.com/a/3059367
+    /**
+     * Prompts the user for input and validates it against a regular expression.
+     *
+     * @param prompt the message to display to the user
+     * @param regex the regular expression to validate the input
+     * @return the valid user input in lowercase
+     */
     public static String getUserInput(String prompt, String regex) {
         Scanner scanner = new Scanner(System.in);
         String input;
